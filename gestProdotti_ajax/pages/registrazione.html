@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function updateMessage(message) {
+            document.getElementById("message").innerHTML = message;
+        }
+
+        $(document).ready(function () {
+            $("#bottoneRegistrazione").click(function () {
+                var usernameInserito = document.getElementById('usernameRegistrazione').value;
+                var passwordInserita = document.getElementById('passwordRegistrazione').value;
+                let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (regex.test(usernameInserito)) { //controllo email
+                    $.get("../AJAX/registrazione.php", {
+                        username: usernameInserito,
+                        password: passwordInserita
+                    }, function (data) {
+                        updateMessage(data["message"]);
+                    }, "json");
+                }
+                else {
+                    updateMessage("Errore: Email non valida");
+                }
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>REGISTRAZIONE</h1>
+    <label for="usernameRegistrazione">Username</label>
+    <input type="text" id="usernameRegistrazione">
+    <br>
+    <label for="passwordRegistrazione">Password</label>
+    <input type="password" id="passwordRegistrazione">
+    <br>
+    <button id="bottoneRegistrazione">REGISTRATI</button>
+    <br>
+    <button onclick="window.location.href='../index.html'">INDIETRO</button>
+    <br>
+    <div id="divMessage">
+        <span id="message"></span>
+    </div>
+</body>
+
+</html>

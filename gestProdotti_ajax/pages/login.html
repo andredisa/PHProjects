@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function updateMessage(message) {
+            document.getElementById("message").innerHTML = message;
+        }
+
+        $(document).ready(function () {
+            $("#bottoneAccedi").click(function () {
+                var usernameInserito = document.getElementById('usernameLogin').value;
+                var passwordInserita = document.getElementById('passwordLogin').value;
+                $.get("../AJAX/login.php", {
+                    username: usernameInserito,
+                    password: passwordInserita
+                }, function (data) {
+                    if (data["status"] == "Ok") {
+                        window.location.href = "prodotti.php";
+                    }
+                    else {
+                        updateMessage(data["message"]);
+                    }
+                } , "json");
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>LOGIN</h1>
+    <label for="usernameLogin">Username</label>
+    <input type="text" id="usernameLogin">
+    <br>
+    <label for="passwordLogin">Password</label>
+    <input type="password" id="passwordLogin">
+    <br>
+    <button id="bottoneAccedi">ACCEDI</button>
+    <br>
+    <button onclick="window.location.href='../index.html'">INDIETRO</button>
+    <br>
+    <div id="divMessage">
+        <span id="message"></span>
+    </div>
+</body>
+
+</html>
