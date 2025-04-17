@@ -1,4 +1,4 @@
-# 🎯 PHP Project Showcase
+# 🎯 PHP Projects Showcase
 
 > A collection of PHP web applications built to demonstrate **real-world web development** concepts like **authentication**, **CRUD operations**, **AJAX**, **email handling**, and **database interaction**.
 
